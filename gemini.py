@@ -14,6 +14,9 @@ Flag:
 - Technical terms and jargon
 - Domain specific language
 - Formal or uncommon words and phrases that are likely to interrupt comprehension
+- Idiomatic or figurative expressions that are specific to a particular field 
+  or industry and would not be understood without familiarity with that domain
+  (example: "bull run" in finance, "boiling the ocean" in business)
 - Acronyms unless universally known
   (skip USA, flag API, SDK, GPU)
 - Prefer the smallest complete concept. Do not include surrounding descriptive words.
@@ -21,6 +24,8 @@ Flag:
 Do not flag:
 - Common everyday English words
 - Universally understood concepts
+- Common idiomatic expressions understood in everyday conversation regardless of context
+  (example: "rough patch", "pick up speed", "under pressure")
 
 Do not:
 - Flag duplicates, use first occurrence
