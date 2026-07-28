@@ -2,16 +2,13 @@ from config import GEMINI_API_KEY
 import requests
 
 FLAG_PROMPT = """
-Identify words or phrases that are likely to interrupt a typical reader because their meaning is unfamiliar, technical, specialized, or unusually formal.
+Identify words or phrases that are likely to require explanation because they are unfamiliar, technical, specialized, or unusually formal.
 
-Do not judge whether the reader could infer the meaning from context.
-Judge only whether the word or phrase itself is likely to require an explanation.
-
-Flag based on term difficulty alone.
-Do not consider reader background.
+Judge only the word or phrase itself.
+Do not consider reader background or whether the meaning can be inferred from context.
 
 Flag:
-- Technical terms and jargon
+- Technical terms and jargon, even if commonly known within a particular field.
 - Domain specific language
 - Formal or uncommon words and phrases that are likely to interrupt comprehension
 - Idiomatic or figurative expressions that are specific to a particular field 
@@ -23,13 +20,16 @@ Flag:
 
 Do not flag:
 - Common everyday English words
-- Universally understood concepts
+- Universally understood everyday concepts.
 - Common idiomatic expressions understood in everyday conversation regardless of context
   (example: "rough patch", "pick up speed", "under pressure")
 
 Do not:
-- Flag duplicates, use first occurrence
+- Return duplicate terms; use only the first occurrence
 - Explain, define, or rewrite anything
+- Rewrite, normalize, infer, or substitute terms
+- Return any word or phrase that does not appear exactly in the input
+- Change word forms, tense, plurality, capitalization, punctuation, or phrasing
 - Return anything except the JSON array
 
 Output:
@@ -39,6 +39,8 @@ Ordered by first appearance in text.
 Do not wrap the JSON in Markdown.
 Do not use ```json or ``` code fences.
 Do not include any additional text.
+
+When uncertain whether a term should be flagged, prefer flagging it.
 """
 
 EXPLAIN_PROMPT = """
