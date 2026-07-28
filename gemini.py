@@ -2,14 +2,16 @@ from config import GEMINI_API_KEY
 import requests
 
 FLAG_PROMPT = """
-Identify words or phrases that are likely to require explanation because they are unfamiliar, technical, specialized, or unusually formal.
+Identify words or phrases that represent technical, specialized, domain-specific, or unusually formal concepts.
 
 Judge only the word or phrase itself.
-Do not consider reader background or whether the meaning can be inferred from context.
+Ignore reader background and contextual clues.
+
+Since explanations are optional, prefer exposing technical concepts rather than omitting them.
 
 Flag:
-- Technical terms and jargon, even if commonly known within a particular field.
-- Domain specific language
+- Technical terms, jargon, named concepts, and terminology, even if commonly known within a particular field.
+- Domain-specific concepts, terminology, and language.
 - Formal or uncommon words and phrases that are likely to interrupt comprehension
 - Idiomatic or figurative expressions that are specific to a particular field 
   or industry and would not be understood without familiarity with that domain
@@ -17,10 +19,11 @@ Flag:
 - Acronyms unless universally known
   (skip USA, flag API, SDK, GPU)
 - Prefer the smallest complete concept. Do not include surrounding descriptive words.
+- If a concept contains a more general word, return only the most specific complete concept.
+- When uncertain whether a term should be flagged, prefer flagging it.
 
 Do not flag:
-- Common everyday English words
-- Universally understood everyday concepts.
+- Common everyday English words and phrases unrelated to a specialized concept.
 - Common idiomatic expressions understood in everyday conversation regardless of context
   (example: "rough patch", "pick up speed", "under pressure")
 
@@ -39,8 +42,6 @@ Ordered by first appearance in text.
 Do not wrap the JSON in Markdown.
 Do not use ```json or ``` code fences.
 Do not include any additional text.
-
-When uncertain whether a term should be flagged, prefer flagging it.
 """
 
 EXPLAIN_PROMPT = """
@@ -88,7 +89,7 @@ def request_gemini(system_instruction, user_input, id=None):
         "system_instruction": system_instruction,
         "input": user_input,
         "generation_config": {
-            "thinking_level": "low",
+            "thinking_level": "medium",
         }
     }
 
