@@ -75,7 +75,7 @@ h1 {
 }
 
 .description {
-    font-size: var(--base);
+    font-size: var(--sm);
     color: var(--muted-foreground);
     margin-bottom: var(--space-xl);
 }
