@@ -3,6 +3,7 @@
     --foreground: oklch(87.2% .004 286.32);
     --muted-foreground: oklch(55.2% .014 285.94);
     --card: oklch(18.5% 0 0);
+    --accent-brand: oklch(0.82 0.17 152);
 
     --text-xs: 0.75rem;    /* 12px */
     --text-sm: 0.875rem;   /* 14px */
@@ -74,10 +75,18 @@ h1 {
     margin-bottom: var(--space-s);
 }
 
+.main-title span {
+    color: var(--accent-brand);
+}
+
 .description {
     font-size: var(--sm);
     color: var(--muted-foreground);
     margin-bottom: var(--space-xl);
+}
+
+.description span {
+    color: var(--accent-brand);
 }
 
 textarea {
