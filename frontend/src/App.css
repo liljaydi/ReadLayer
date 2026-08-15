@@ -1,7 +1,7 @@
 :root {
     --background: oklch(14.5% 0 0);
     --foreground: oklch(87.2% .004 286.32);
-    --muted-foreground: oklch(55.2% .014 285.94);
+    --muted-foreground: oklch(0.62 0.012 285);
     --card: oklch(18.5% 0 0);
     --accent-brand: oklch(0.82 0.17 152);
 
@@ -114,8 +114,13 @@ textarea:focus {
 }
 
 textarea.text-input {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
     border-radius: 20px;
-    background: var(--card);
     width: 800px;
     min-height: 200px;
 }
