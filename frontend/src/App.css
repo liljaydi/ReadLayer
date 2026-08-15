@@ -38,6 +38,18 @@ h1 {
     font-size: var(--space-xl);
 }
 
+/* background image */
+
+.background-img {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    filter: brightness(15%);
+}
+
 /* Header */
 
 .header {
